@@ -1,0 +1,14 @@
+{% extends 'home.html'%}
+{% block main %}
+<div class="container border align-itens-center">
+    <form method="post">
+        <label for="username">Nome de usuário</label>
+        <input class="username" type="text" name="username">
+        <label for="password">Senha</label>
+        <input type="password" name="password">
+
+        <input type="submit">
+    </form>
+</div>
+    
+{% endblock %}

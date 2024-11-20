@@ -1,0 +1,25 @@
+{% extends 'home.html'%}
+{% block main %}
+<div class="container border align-itens-center">
+    <form method="post">
+        
+        <label for="username">Nome</label>
+        <input class="username" type="text" name="username" required>
+
+        <label for="nickname">Usuário</label>
+        <input type="text" name="nickname" required>
+
+        <label for="email">e-mail</label>
+        <input type="email" name="email" required>
+
+        <label for="password">Senha</label>
+        <input type="password" name="password" required>
+
+        <label for="is_admin">Administrador</label>
+        <input type="checkbox" name="is_admin" value="True">
+
+        <input type="submit">
+    </form>
+</div>
+    
+{% endblock %}
