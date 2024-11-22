@@ -22,15 +22,15 @@ def login():
             user = db.session.execute(db.select(UserBase).filter_by(username=username)).scalar_one()
 
             if not user.check_password(password):
-                error = "Senha incorreta"
+                error = "Usuário ou senha incorreta!"
             else:
                 login_user(user)
                 return redirect(url_for('home.home',))
 
         except NoResultFound:
-            error = 'Usuário não encontrado'
+            error = 'Usuário não encontrado na base de dados'
         except Exception as er:
-            error = f"Erro inesperado: {er}"
+            error = f"Erro inesperado: {er}" 
             print(er)
 
         flash(error)
@@ -72,7 +72,8 @@ def register():
                 return redirect(url_for('auth.login'))
             
             except Exception as e:
-                flash(f'Erro ao cadastrar  o usuário: {e}')
+                flash(f'Erro ao cadastrar  o usuário')
+                print(e)
         
         else:
             flash(error)
