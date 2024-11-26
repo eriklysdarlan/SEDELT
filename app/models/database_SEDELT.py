@@ -40,3 +40,17 @@ class Admin(UserBase):
     
     def has_access(self, permission):
         return True
+    
+
+class Student(db.Model):
+    __tablename__ = "students"
+
+
+    registration_number: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=False)
+    name: Mapped[str] = mapped_column(String(120), nullable=False)
+    series: Mapped[str] = mapped_column(String(15), nullable=False)
+
+    def __init__(self, name, registration_number, series):
+        self.name = name
+        self.registration_number = registration_number
+        self.series = series
