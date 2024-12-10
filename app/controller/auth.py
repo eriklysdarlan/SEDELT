@@ -14,18 +14,22 @@ def load_user(user_id):
 @bp_auth.route('/login', methods=['GET','POST'])
 def login():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        username = request.form.get('username')
+        password = request.form.get('password')
 
-        error = None
         try:
             user = db.session.execute(db.select(UserBase).filter_by(username=username)).scalar_one()
 
             if not user.check_password(password):
-                error = "Usuário ou senha incorreta!"
+                flash("Usuário ou senha incorreta!")
+                return redirect(url_for('bp_auth.login'))
+            
+            login_user(user)
+                
+            if user.is_admin:
+                return redirect(url_for('admin.administrativControl',))
             else:
-                login_user(user)
-                return redirect(url_for('home.home',))
+                return redirect(url_for('home.home'))
 
         except NoResultFound:
             error = 'Usuário não encontrado na base de dados'

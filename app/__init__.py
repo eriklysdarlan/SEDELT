@@ -5,6 +5,7 @@ from app.models.database_SEDELT import db
 
 from app.home import bp_home
 
+from app.controller.admin.routes_admin import admin
 from app.controller.admin.routes_alunos import alunos
 from app.controller.admin.routes_professores import professores
 from app.controller.admin.routes_disciplinas import disciplinas
@@ -32,6 +33,7 @@ app.register_blueprint(bp_home, url_prefix='/')
 app.register_blueprint(bp_auth)
 
 #nestas rotas os administradores terão acesso
+app.register_blueprint(admin, url_prefix='/admin')
 app.register_blueprint(alunos, url_prefix='/alunos')
 app.register_blueprint(professores, url_prefix='/professores/')
 app.register_blueprint(disciplinas, url_prefix='/disciplinas')
