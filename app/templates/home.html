@@ -20,8 +20,8 @@
 
                     {% if  current_user.is_authenticated %}
                     
-                        <li class="nav-item">{{ current_user.nickname }}</li>
-                        <li class="nav-item"><a href="{{ url_for('auth.logout')}}">Sair</a></li>
+                        <li class="nav-item nav-link text-light pe-3"><span style="text-transform: uppercase;">{{ current_user.nickname }}</span></li>
+                        <li class="nav-item"><a href="{{ url_for('auth.logout')}}" class="nav-link text-light">Sair</a></li>
                     
                     {% else %}
                     
