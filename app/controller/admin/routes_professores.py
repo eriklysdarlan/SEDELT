@@ -1,6 +1,8 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
+from flask.views import MethodView
+from app.controller.admin.routes_admin_panel import AdminPanel
 
-professores = Blueprint('professores',__name__)
+professores = Blueprint('professores', __name__)
 
 """
     -- obter professores
@@ -9,18 +11,9 @@ professores = Blueprint('professores',__name__)
     -- excluir professores
 """
 
-@professores.route('/')
-def geteprofessores():
-    pass
-
-@professores.route('/new', methods=['POST'])
-def neweprofessores():
-    pass
-
-@professores.route('/<int:id>', methods=['PUT'])
-def editeprofessoresid():
-    pass
-
-@professores.route('/<int:id>/delete')
-def deleteprofessores(id):
-    pass
+class Professores(AdminPanel):
+    def get(self):
+        super().get()
+        return render_template('admin/professores.html')
+    
+professores.add_url_rule('/', view_func=Professores.as_view('professores'))

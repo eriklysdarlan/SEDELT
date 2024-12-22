@@ -1,4 +1,5 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
+from app.controller.admin.routes_admin_panel import AdminPanel
 
 disciplinas = Blueprint('disciplinas',__name__)
 
@@ -9,18 +10,9 @@ disciplinas = Blueprint('disciplinas',__name__)
     -- excluir disciplinas / (DELET)
 """
 
-@disciplinas.route('/')
-def getDisciplinas():
-    pass
-
-@disciplinas.route('/new', methods=['POST'])
-def newDisciplinas():
-    pass
-
-@disciplinas.route('/<int:id>', methods=['PUT'])
-def editDisciplinas(id):
-    pass
-
-@disciplinas.route('/<int:id>/delete')
-def deleteDisciplinas(id):
-    pass
+class Disciplinas(AdminPanel):
+    def get(self):
+        super().get()
+        return render_template('admin/disciplinas.html')
+    
+disciplinas.add_url_rule('/', view_func=Disciplinas.as_view('disciplinas'))

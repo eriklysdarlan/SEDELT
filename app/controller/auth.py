@@ -27,7 +27,7 @@ def login():
             login_user(user)
                 
             if user.is_admin:
-                return redirect(url_for('admin.administrativControl',))
+                return redirect(url_for('admin.admin_panel',))
             else:
                 return redirect(url_for('home.home'))
 
