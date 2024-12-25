@@ -13,6 +13,6 @@
     border-radius: 5px 0 0 5px;
 }
 
-/* .height100 {
-    height: 100vh;
-} */
+.hidden {
+    display: none;
+}
