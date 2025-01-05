@@ -1,22 +1,27 @@
 from flask import Flask
 from flask_login import LoginManager
+from flask_migrate import Migrate
 
 from app.models.database_SEDELT import db
 
 from app.home import bp_home
 
-from app.controller.admin.routes_admin_panel import admin
-from app.controller.admin.routes_alunos import alunos
-from app.controller.admin.routes_professores import professores
-from app.controller.admin.routes_disciplinas import disciplinas
-from app.controller.admin.route_relatorio import relatorio
-from app.controller.auth import bp_auth, login_manager
+from app.view.admin.routes_admin_panel import admin
+from app.view.admin.routes_alunos import alunos
+from app.view.admin.routes_professores import professores
+from app.view.admin.routes_disciplinas import disciplinas
+from app.view.admin.route_relatorio import relatorio
+from app.view.auth import bp_auth, login_manager
 
-from app.controller.student_reg_management.routes_reg_management import registration_management
+from app.view.student_reg_management.routes_reg_management import registration_management
 
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///SEDELT.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+migrate = Migrate(app, db)
+
 app.config['SECRET_KEY'] = '123'
 
 #configurando a base de dados

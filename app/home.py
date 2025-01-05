@@ -7,7 +7,7 @@ bp_home = Blueprint('home',__name__)
 def home():
 
     if current_user.is_authenticated:
-        if current_user.is_admin:
+        if current_user.has_access('admin'):
             return redirect(url_for('admin.admin_panel'))
 
     return render_template('home.html')

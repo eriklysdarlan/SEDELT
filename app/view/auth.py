@@ -26,7 +26,7 @@ def login():
             
             login_user(user)
                 
-            if user.is_admin:
+            if user.has_access('admin'):
                 return redirect(url_for('admin.admin_panel',))
             else:
                 return redirect(url_for('home.home'))

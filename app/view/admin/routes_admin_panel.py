@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, abort
 from flask_login import login_required, current_user
-from flask.views import MethodView
+from flask.views import View
 
 admin = Blueprint('admin', __name__)
 """ admin.register_blueprint(professores, url_prefix='/professores') """
@@ -16,11 +16,11 @@ isso inclui:
 -- Gerar boletins
 """
 
-class AdminPanel(MethodView):
+class AdminPanel(View):
     decorators = [login_required]
 
-    def get(self):
-        if not current_user.is_admin:
+    def dispatch_request(self):
+        if not current_user.has_access('admin'):
             abort(403)
         return render_template('admin/admin.html')
 

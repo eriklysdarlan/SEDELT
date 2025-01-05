@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from app.controller.admin.routes_admin_panel import AdminPanel
+from app.view.admin.routes_admin_panel import AdminPanel
 
 disciplinas = Blueprint('disciplinas',__name__)
 

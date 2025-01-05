@@ -17,26 +17,26 @@ class UserBase(db.Model, UserMixin):
     nickname: Mapped[str] = mapped_column(String(50), unique=True, nullable=False)
     email: Mapped[str] = mapped_column(String(120),unique=True, nullable=False)
     password: Mapped[str] = mapped_column(String(120), nullable=False)
-    is_admin: Mapped[bool] = mapped_column(Boolean(), default=False)
+    user_type: Mapped[str] = mapped_column(String(50), nullable=False, default="user")
 
-    def __init__(self, username, nickname, email, password):
+    def __init__(self, username, nickname, email, password, user_type="user"):
         super().__init__()
         self.username = username
         self.nickname = nickname
         self.email = email
         self.password = generate_password_hash(password)
+        self.user_type = user_type
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
     
     def has_access(self, permission):
-        return False
+        return self.user_type == permission
 
 
 class Admin(UserBase):
     def __init__(self, username, nickname, email, password):
-        super().__init__(username, nickname, email, password)
-        self.is_admin = True
+        super().__init__(username, nickname, email, password, user_type="admin")
     
     def has_access(self, permission):
         return True

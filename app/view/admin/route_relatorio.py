@@ -1,10 +1,10 @@
 from flask import Blueprint, render_template
-from app.controller.admin.routes_admin_panel import AdminPanel
+from app.view.admin.routes_admin_panel import AdminPanel
 
 relatorio = Blueprint('relatorios',__name__)
 
 class Relatorio(AdminPanel):
-    def get(self):
+    def dispatch_request(self):
         super().get()
         return render_template('admin/relatorios.html')
     
